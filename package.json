@@ -20,5 +20,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security"
+  },
+  "engines": {
+    "node": "12.16.2"
   }
 }
