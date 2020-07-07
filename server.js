@@ -1,5 +1,6 @@
 const app = require('express')();
 const server = require('http').Server(app);
+const io = require('socket.io').listen(server);
 
 let dataSocket = {
   'room1': [{
@@ -11,6 +12,19 @@ let dataSocket = {
     text: 'Hola2',
   }]
 }
+
+io.on('connection', (socket) => {
+
+  socket.on('join', (room) => {
+    socket.join(room);
+    socket.on('message', (data) => {
+      dataSocket[room].push(data);
+      socket.broadcast.to(room).emit('message', dataSocket[room]);
+      socket.broadcast.emit('admin', dataSocket);
+    });
+  });
+
+});
 
 
 app.get('/', (req, res) => {
