@@ -9,7 +9,7 @@ app.get('/hola', (req, res) => {
   res.json({ "test": "hola"});
 });
 
-server.listen(5000, (err) => {
+server.listen(process.env.PORT || 3000, (err) => {
   if (err) process.exit(0);
   console.log(`> On your local: http://localhost:3000`);
 });
