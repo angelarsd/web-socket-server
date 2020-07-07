@@ -31,6 +31,14 @@ app.get('/', (req, res) => {
   res.json(dataSocket);
 });
 
+app.get('/messages/admin', (req, res) => {
+  res.json(dataSocket);
+});
+
+app.get('/messages/:room', (req, res) => {
+  res.json(dataSocket[req.params.room]);
+});
+
 server.listen(process.env.PORT || 3000, (err) => {
   if (err) process.exit(0);
   console.log(`> On your local: http://localhost:3000`);
