@@ -1,6 +1,7 @@
-const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io').listen(server);
+const express = require('express');
+const app = express();
+const socketIO = require('socket.io');
+const io = socketIO(app);
 
 let dataSocket = {
   'room1': [{
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
   res.json(dataSocket);
 });
 
-server.listen(process.env.PORT || 3000, (err) => {
+app.listen(process.env.PORT || 3000, (err) => {
   if (err) process.exit(0);
   console.log(`> On your local: http://localhost:3000`);
 });
